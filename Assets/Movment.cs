@@ -5,16 +5,17 @@ public class Movment : MonoBehaviour
 {
 
     private float horizontal;
-    private float speed = 8f;
-    private float jumpingPower = 16f;
+    private float speed = 5f;
+    private float jumpingPower = 9f;
     private bool isFacingRight = true;
 
     private bool doubleJump;
 
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private Animator animator;
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField]  Transform groundCheck;
+    [SerializeField]  LayerMask groundLayer;
+    [SerializeField]  GameObject particles;
+
 
     private void Update()
     {
@@ -41,6 +42,12 @@ public class Movment : MonoBehaviour
         }
 
         Flip();
+        
+            if(horizontal != 0){
+                particles.SetActive(true);
+            }else{
+                particles.SetActive(false);
+            }
     }
 
     private void FixedUpdate()
@@ -63,6 +70,5 @@ public class Movment : MonoBehaviour
             transform.localScale = localScale;
         }
 
-        animator.SetFloat("Speed", Mathf.Abs(horizontal));
     }
 }
